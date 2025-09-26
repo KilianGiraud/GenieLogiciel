@@ -1,60 +1,71 @@
+# Présentation
+
+Il y a 3 fichiers de tests unitaires présents dans *test/java/re/forestier/edu*, ces fichiers sont **UnitTestsAffichage**, **UnitTestsPlayer** et **UnitTestsUpdatePlayer**, chacun de ces fichiers contient les tests correspondants aux classes du même nom.
+
 # Différents tests
 
 ## Tests unitaires
 
-### Main / main(String[])
+### UpdatePlayer
 
-### Main / Main()
+#### majFinDeTour
 
-- "Main" : Executer la fonction Main
+- "Dead Player" : Test de la condition si le joueur est mort *fonction testDeadPlayer*
+- "Alive Player" : Tests des différents scénarios en lien avec les classes et les points de vie *fonction testAlivePlayer*
+- "Conditional Inventory" : Tests des conditions en lien avec la présence d'objet dans l'inventaire de certaines classes *fonction testConditionalInventoryPlayer*
 
-### UpdatePlayer / majFinDeTour
-
-- "maj" : Executer la fonction
-- "Mort" : Vérifier si cela fonctionne quand le joueur est mort (0 PV)
-- "Le cimetière de if" : Vérifier toutes les clauses "if / else / elif" (y'en a trop pour tout énumérer)
-
-### UpdatePlayer / addXP *assez de tests*
+#### addXP 
 
 - "Player level" : Test ajout négatif de niveau 
 
 - "Player level 2" : Ajouter beaucoup d'XP pour passer de niveau et vérifier ensuite le **put**
 
-### player / removeMoney *assez de tests*
+**Ces tests sont effectués dans les fonctions de la partie "player / retrieveLevel"**
+
+#### UpdatePlayer 
+
+- "UpdatePlayer" : Test de la fonction générale "UpdatePlayer" *fonction testUpdatePlayer*
+
+### Player
+
+#### removeMoney 
 
 - "Remove money" : Test de retirer plus d'argent que le joueur n'en possède *fonction testNegativeMoney*
 
 - "Remove money 2" : Retirer moins d'argent que ce que le joueur possède *fonction testPositiveMoney*
 
 
-### player / addMoney *assez de tests*
+#### addMoney 
 
 - "Player money" : Test d'ajout d'argent de valeur négative *fonction testAddNegativeMoney*
 
 - "Player money 2" : Test d'ajout d'argent = 0 *fonction testAddNoMoney*
 
 - "Player money 3" : Test d'ajout normal
-### player / retrieveLevel *assez de tests*
+#### retrieveLevel 
 
 - "Player level 3" : Tester d'arriver au level 2 *fonction testGoToLvl2*
 - "Player level 4" : Tester d'arriver au level 3
 - "Player level 5" : Tester d'arriver au level 4 et 5 *fonction testGoToLvl4and5*
 
 
-### player / getXP *assez de tests*
+#### getXP
 
 - "Player XP" : Test de la fonction getXP (affichage aussi) *fonction testXP*
 
-### player / player *assez de tests*
+#### player 
 
 - "Player name" : Test basique avec nom du joueur correctement mit *fonction testPlayerName*
 
 - "Player class" : Test de l'affichage des classes et de si la classe est **null** *fonction testClass*
 
+### Affichage
 
-### Affichage / afficherJoueur *assez de tests*
+#### afficherJoueur
 
 - "Inventaire" : Remplir l'inventaire pour tester l'affichage *fonction testAddItem*
+
+#### Affichage 
 
 - "Affichage" : Test de la fonction générale "Affichage" *fonction testAffichage*
 

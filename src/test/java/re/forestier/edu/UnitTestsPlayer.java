@@ -10,17 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
-public class UnitTests {
-
-
-    // Test basique de vérification du nom du joueur
-    @Test
-    @DisplayName("Sample test")
-    void testPlayerName() {
-        player player = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
-        assertThat(player.playerName, is("Florian"));
-    }
-
+public class UnitTestsPlayer {
     /* Tests de player / removeMoney */
 
     //Tentative de retrait d'un montant supérieur à la quantité d'argent du joueur
@@ -153,25 +143,4 @@ public class UnitTests {
         assertThat(p2.getAvatarClass(), is("DWARF"));
         assertThat(p3.getAvatarClass(), is("ARCHER"));
     }
-
-    /* Test d'affichage (inventaire) */
-
-
-    // Ajout d'un Item, affichage du joueur puis vérification de l'item dans l'inventaire
-    @Test
-    @DisplayName("Item added")
-    void testAddItem() {
-        player p = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
-        p.inventory.add("Maximilien");
-        Affichage.afficherJoueur(p);
-        assertThat(p.inventory, hasItem("Maximilien"));
-    }
-
-    // Fonction qui va executer la fonction "Affichage"
-    @Test
-    @DisplayName("Test Affichage")
-    void testAffichage() {
-        new Affichage();
-    }
-
 }
