@@ -30,6 +30,7 @@ public class UnitTestsUpdatePlayer {
     void testDeadPlayer() {
         player p = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
         UpdatePlayer.majFinDeTour(p);
+        assertThat(p.currenthealthpoints, is(0));
     }
 
 
@@ -79,6 +80,9 @@ public class UnitTestsUpdatePlayer {
 
         UpdatePlayer.majFinDeTour(p);
         UpdatePlayer.majFinDeTour(p1);
+
+        assertThat(p.currenthealthpoints, is(102));
+        assertThat(p1.currenthealthpoints, is(112));
 
     }
 }

@@ -9,6 +9,9 @@ import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UnitTestsPlayer {
     /* Tests de player / removeMoney */
@@ -87,15 +90,44 @@ public class UnitTestsPlayer {
     /* Tests player / retrieveLevel */
 
 
-    // Ajout d'XP afin d'atteindre le Level 2
+
+    // Ajout d'XP afin d'atteindre le Level 2 et tests des capacités ajoutées
     @Test
     @DisplayName("Access to level 2")
     void testGoToLvl2() {
         player p = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        final String[] objectList = {
+        "Lookout Ring : Prevents surprise attacks",
+        "Scroll of Stupidity : INT-2 when applied to an enemy",
+        "Draupnir : Increases XP gained by 100%",
+        "Magic Charm : Magic +10 for 5 rounds",
+        "Rune Staff of Curse : May burn your ennemies... Or yourself. Who knows?",
+        "Combat Edge : Well, that's an edge",
+        "Holy Elixir : Recover your HP"
+        };
+
+        int oldSize = p.inventory.size();
+        Map<String, Integer> oldAbilities = new HashMap<>(p.abilities);
 
         try {
             UpdatePlayer.addXp(p, 58);
             p.retrieveLevel();
+            
+            // Vérifie que la taille a bien augmenté de 1
+            assertThat(p.inventory.size(), is(oldSize + 1));
+            
+            // Vérifie que le dernier objet ajouté est bien dans la liste des objets possibles
+            String lastAdded = p.inventory.get(p.inventory.size() - 1);
+            assertThat(Arrays.asList(objectList), hasItem(lastAdded));
+
+            // Vérifie qu'au moins une ability a changé (ajoutée ou upgradée)
+            boolean abilityChanged = p.abilities.entrySet().stream().anyMatch(entry ->
+                !oldAbilities.containsKey(entry.getKey()) || // nouvelle clé
+                !oldAbilities.get(entry.getKey()).equals(entry.getValue()) // valeur upgradée
+            );
+
+            assertThat("At least one ability should be added or upgraded", abilityChanged, is(true));
+
         } catch (Exception e) {
             assertThat(e, is(instanceOf(IllegalArgumentException.class)));
         }
