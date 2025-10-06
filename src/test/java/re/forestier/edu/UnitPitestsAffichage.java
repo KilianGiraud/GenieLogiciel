@@ -12,5 +12,13 @@ import java.util.ArrayList;
 
 
 public class UnitPitestsAffichage {
-    
+    // Ajout d'un Item, affichage du joueur puis vérification de l'item dans l'inventaire
+    @Test
+    @DisplayName("Item added")
+    void testAddItem() {
+        player p = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        p.inventory.add("Maximilien");
+        String affichage = Affichage.afficherJoueur(p);
+        assertThat(affichage, containsString("Maximilien"));
+    }
 }
