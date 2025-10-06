@@ -41,7 +41,7 @@ Il y a 3 fichiers de tests unitaires présents dans *test/java/re/forestier/edu*
 
 - "Player money 2" : Test d'ajout d'argent = 0 *fonction testAddNoMoney*
 
-- "Player money 3" : Test d'ajout normal
+- "Player money 3" : Test d'ajout normal *fonction testAddMoney*
 #### retrieveLevel 
 
 - "Player level 3" : Tester d'arriver au level 2 *fonction testGoToLvl2*

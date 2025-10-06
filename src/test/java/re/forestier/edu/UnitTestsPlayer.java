@@ -24,6 +24,7 @@ public class UnitTestsPlayer {
 
         try {
             p.removeMoney(200);
+            assertThat(p.money, is(-100));
         } catch (Exception e) {
             assertThat(e, is(instanceOf(IllegalArgumentException.class)));
         }
@@ -38,6 +39,7 @@ public class UnitTestsPlayer {
 
         try {
             p.removeMoney(50);
+            assertThat(p.money, is(50));
         } catch (Exception e) {
             assertThat(e, is(instanceOf(IllegalArgumentException.class)));
         }
@@ -54,6 +56,7 @@ public class UnitTestsPlayer {
 
         try {
             p.addMoney(-40);
+            assertThat(p.money, is(60));
         } catch (Exception e) {
             assertThat(e, is(instanceOf(IllegalArgumentException.class)));
         }
@@ -68,6 +71,7 @@ public class UnitTestsPlayer {
 
         try {
             p.addMoney(0);
+            assertThat(p.money, is(100));
         } catch (Exception e) {
             assertThat(e, is(instanceOf(IllegalArgumentException.class)));
         }
@@ -82,6 +86,7 @@ public class UnitTestsPlayer {
 
         try {
             p.addMoney(100);
+            assertThat(p.money, is(200));
         } catch (Exception e) {
             assertThat(e, is(instanceOf(IllegalArgumentException.class)));
         }
