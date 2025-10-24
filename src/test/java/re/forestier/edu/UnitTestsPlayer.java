@@ -139,18 +139,32 @@ public class UnitTestsPlayer {
 
     }
 
-    // Ajout d'XP afin d'atteindre le Level 4 et 5
+    // Ajout d'XP afin d'atteindre les différents niveaux
     @Test
-    @DisplayName("Access to level 4 and 5")
-    void testGoToLvl4and5() {
+    @DisplayName("Access to differents levels")
+    void testGoToDifferentLvl() {
+        player p = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
         player p2 = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        player p3 = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        player p4 = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        player p5 = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
 
-        try {
-            UpdatePlayer.addXp(p2, 120);
-            p2.retrieveLevel();
-        } catch (Exception e) {
-            assertThat(e, is(instanceOf(IllegalArgumentException.class)));
-        }
+        UpdatePlayer.addXp(p, 5);
+        assertThat(p.retrieveLevel(), is(1));
+
+        UpdatePlayer.addXp(p2, 10);
+        assertThat(p2.retrieveLevel(), is(2));
+
+        UpdatePlayer.addXp(p3, 27);
+        assertThat(p3.retrieveLevel(), is(3));
+
+        UpdatePlayer.addXp(p4, 57);
+        assertThat(p4.retrieveLevel(), is(4));
+
+        UpdatePlayer.addXp(p5, 111);
+        assertThat(p5.retrieveLevel(), is(5));
+
+
     }
 
     /* Test XP */

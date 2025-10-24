@@ -1,10 +1,12 @@
 # Présentation
 
-Il y a 3 fichiers de tests unitaires présents dans *test/java/re/forestier/edu*, ces fichiers sont **UnitTestsAffichage**, **UnitTestsPlayer** et **UnitTestsUpdatePlayer**, chacun de ces fichiers contient les tests correspondants aux classes du même nom.
+Il y a 6 fichiers de tests unitaires présents dans *test/java/re/forestier/edu*, ces fichiers sont **UnitTestsAffichage**, **UnitTestsPlayer** et **UnitTestsUpdatePlayer** puis **UnitPitestsAffichages**, **UnitPitestsPlayer** et **UnitPitestsUpdatePlayer**, chacun de ces fichiers contient les tests correspondants aux classes du même nom, certains sont en lien avec le systeme **JaCoCotestReport**, et les autres avec l'outil **PIT**.
 
-# Différents tests
+# Tests Univtaires
 
-## Tests unitaires
+## JaCoCoTestReport
+
+JaCoCo est un outil servant à voir le taux de couverture des tests (autrement dit voir les lignes du code qui ont été testées.)
 
 ### UpdatePlayer
 
@@ -68,6 +70,41 @@ Il y a 3 fichiers de tests unitaires présents dans *test/java/re/forestier/edu*
 #### Affichage 
 
 - "Affichage" : Test de la fonction générale "Affichage" *fonction testAffichage*
+
+
+## PIT
+
+PIT (ou Pitest) est un outil qui va faire *muter* notre code, par exemple `modifier un < en <=` afin de voir si le code réagit correctement.
+
+### UpdatePlayer
+
+#### addXp 
+
+- "Sorties booléennes" : Test des différentes sorties booléennes de la fonction. *fonction testBoole*
+
+#### majFinDeTour
+
+- "Print KO" : Test si le joueur est KO, le message affiché est bien le bon. *fonction testKO*
+
+- "Conditions de vie" : Test la condition principale du currenthealthpoints pour tuer les différentes mutations. *fonction testConditionHealthBelowHalf*
+
+
+### Player
+
+#### removeMoney
+
+- "Retrait d'argent" : Tests de différentes situations de retrait d'argent pour tuer les mutations *fonction testRemoveMoney*
+
+#### getXp
+
+- "Affichage d'XP" : Test de la fonction getXp pour vérifier si elle renvoie bien la bonne valeur *fonction testGetXp*
+
+
+### Affichage
+
+#### afficherJoueur
+
+- "Inventaire bien rempli" : Test de la fonction "afficherJoueur" pour voir de si l'item à l'intérieur de l'inventaire est bien écrit *fonction testAddItemPitest*
 
 -----------------------------
 
