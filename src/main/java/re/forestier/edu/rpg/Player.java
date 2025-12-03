@@ -3,7 +3,7 @@ package re.forestier.edu.rpg;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class player {
+public class Player {
     public String playerName;
     public String Avatar_name;
     private String AvatarClass;
@@ -20,7 +20,7 @@ public class player {
 
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
-    public player(String playerName, String avatar_name, String avatarClass, int money, ArrayList<String> inventory) {
+    public Player(String playerName, String avatar_name, String avatarClass, int money, ArrayList<String> inventory) {
         if (!avatarClass.equals("ARCHER") && !avatarClass.equals("ADVENTURER") && !avatarClass.equals("DWARF") ) {
             return;
         }
@@ -72,16 +72,5 @@ public class player {
     public int getXp() {
         return this.xp;
     }
-
-    /*
-    Ингредиенты:
-        Для теста:
-
-            250 г муки
-            125 г сливочного масла (холодное)
-            70 г сахара
-            1 яйцо
-            1 щепотка соли
-     */
 
 }
