@@ -5,16 +5,16 @@ import java.util.HashMap;
 
 public class Player {
     public String playerName;
-    public String Avatar_name;
-    private String AvatarClass;
+    public String avatarName;
+    private String avatarClass;
 
     public Integer money;
     private Float __real_money__;
 
 
     public int level;
-    public int healthpoints;
-    public int currenthealthpoints;
+    public int healthPoints;
+    public int currentHealthPoints;
     protected int xp;
 
 
@@ -26,15 +26,15 @@ public class Player {
         }
 
         this.playerName = playerName;
-        Avatar_name = avatar_name;
-        AvatarClass = avatarClass;
+        avatarName = avatar_name;
+        avatarClass = avatarClass;
         this.money = Integer.valueOf(money);
         this.inventory = inventory;
-        this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(AvatarClass).get(1);
+        this.abilities = UpdatePlayer.abilitiesPerTypeAndLevel().get(avatarClass).get(1);
     }
 
     public String getAvatarClass () {
-        return AvatarClass;
+        return avatarClass;
     }
 
     public void removeMoney(int amount) throws IllegalArgumentException {

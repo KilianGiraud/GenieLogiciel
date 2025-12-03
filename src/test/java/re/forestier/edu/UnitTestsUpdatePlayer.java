@@ -30,7 +30,7 @@ public class UnitTestsUpdatePlayer {
     void testDeadPlayer() {
         Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
         UpdatePlayer.majFinDeTour(p);
-        assertThat(p.currenthealthpoints, is(0));
+        assertThat(p.currentHealthPoints, is(0));
     }
 
 
@@ -44,7 +44,7 @@ public class UnitTestsUpdatePlayer {
             new Player("Hugolin", "Samsam", "DWARF", 100, new ArrayList<>())
         );
     
-        // Différents cas de vie : {currenthealthpoints, heanlthpoints}
+        // Différents cas de vie : {currentHealthPoints, heanlthpoints}
         int[][] lifeScenarios = {
             {100, 1000},  // Low life
             {1000, 1000}, // Normal life
@@ -54,8 +54,8 @@ public class UnitTestsUpdatePlayer {
     
         for (int[] scenario : lifeScenarios) {
             for (Player p : players) {
-                p.currenthealthpoints = scenario[0];
-                p.healthpoints = scenario[1];
+                p.currentHealthPoints = scenario[0];
+                p.healthPoints = scenario[1];
                 UpdatePlayer.majFinDeTour(p);
             }
         }
@@ -70,10 +70,10 @@ public class UnitTestsUpdatePlayer {
         Player p = new Player("Kilian", "Denver le dernier Dinosaure", "DWARF", 100, new ArrayList<>());
         Player p1 = new Player("Hugolin", "Samsam", "ARCHER", 100, new ArrayList<>());
 
-        p.currenthealthpoints = 100;
-        p.healthpoints = 1000;
-        p1.currenthealthpoints = 100;
-        p1.healthpoints = 1000;
+        p.currentHealthPoints = 100;
+        p.healthPoints = 1000;
+        p1.currentHealthPoints = 100;
+        p1.healthPoints = 1000;
 
         p.inventory.add("Holy Elixir");
         p1.inventory.add("Magic Bow");
@@ -81,8 +81,8 @@ public class UnitTestsUpdatePlayer {
         UpdatePlayer.majFinDeTour(p);
         UpdatePlayer.majFinDeTour(p1);
 
-        assertThat(p.currenthealthpoints, is(102));
-        assertThat(p1.currenthealthpoints, is(112));
+        assertThat(p.currentHealthPoints, is(102));
+        assertThat(p1.currentHealthPoints, is(112));
 
     }
 }

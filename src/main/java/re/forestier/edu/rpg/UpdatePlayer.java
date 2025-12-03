@@ -122,45 +122,45 @@ public class UpdatePlayer {
 
     // majFinDeTour met à jour les points de vie
     public static void majFinDeTour(Player player) {
-        if(player.currenthealthpoints == 0) {
+        if(player.currentHealthPoints == 0) {
             System.out.println("Le joueur est KO !");
             return;
         }
 
-        if(player.currenthealthpoints < player.healthpoints/2) {
+        if(player.currentHealthPoints < player.healthPoints/2) {
             if(!player.getAvatarClass().equals("ADVENTURER")) {
                 if(player.getAvatarClass().equals("DWARF")) {
                     if(player.inventory.contains("Holy Elixir")) {
-                        player.currenthealthpoints+=1;
+                        player.currentHealthPoints+=1;
                     }
-                    player.currenthealthpoints+=1;
+                    player.currentHealthPoints+=1;
                 } else if(player.getAvatarClass().equals("ADVENTURER")) {
-                    player.currenthealthpoints+=2;
+                    player.currentHealthPoints+=2;
                 }
 
 
                 if(player.getAvatarClass().equals("ARCHER")) {
-                    player.currenthealthpoints+=1;
+                    player.currentHealthPoints+=1;
                     if(player.inventory.contains("Magic Bow")) {
-                        player.currenthealthpoints+=player.currenthealthpoints/8-1;
+                        player.currentHealthPoints+=player.currentHealthPoints/8-1;
                     }
                 }
             } else {
-                player.currenthealthpoints+=2;
+                player.currentHealthPoints+=2;
                 if(player.retrieveLevel() < 3) {
-                    player.currenthealthpoints-=1;
+                    player.currentHealthPoints-=1;
                 }
             }
-        } else if(player.currenthealthpoints >= player.healthpoints/2){
-            if(player.currenthealthpoints >= player.healthpoints) {
-                player.currenthealthpoints = player.healthpoints;
+        } else if(player.currentHealthPoints >= player.healthPoints/2){
+            if(player.currentHealthPoints >= player.healthPoints) {
+                player.currentHealthPoints = player.healthPoints;
                 return;
             }
         }
 
 
-        if(player.currenthealthpoints >= player.healthpoints) {
-            player.currenthealthpoints = player.healthpoints;
+        if(player.currentHealthPoints >= player.healthPoints) {
+            player.currentHealthPoints = player.healthPoints;
         }
     }
 }

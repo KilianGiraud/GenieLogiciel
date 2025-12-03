@@ -37,7 +37,7 @@ public class UnitPitestsUpdatePlayer {
     @DisplayName("Test du print KO")
     void testKO(){
         Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
-        p.currenthealthpoints = 0;
+        p.currentHealthPoints = 0;
 
         java.io.ByteArrayOutputStream contenu = new java.io.ByteArrayOutputStream();
         java.io.PrintStream original = System.out;
@@ -57,15 +57,15 @@ public class UnitPitestsUpdatePlayer {
         }
     }
 
-    /* //Test qui va vérifier le changement de currenthealthpoints si le player est un ADVENTURER
+    /* //Test qui va vérifier le changement de currentHealthPoints si le player est un ADVENTURER
     @Test
     @DisplayName("Test heal pour ADVENTURER selon le niveau")
     void testHealAdventurerLevel() {
         player lowLevel = new player("Noob", "Débutant", "ADVENTURER", 100, new ArrayList<>());
         player highLevel = new player("Pro", "Vétéran", "ADVENTURER", 100, new ArrayList<>());
 
-        lowLevel.currenthealthpoints = 40;
-        highLevel.currenthealthpoints = 40;
+        lowLevel.currentHealthPoints = 40;
+        highLevel.currentHealthPoints = 40;
 
         // Simule retrieveLevel() = 2 pour lowLevel et 5 pour highLevel
         UpdatePlayer.addXp(lowLevel, 10);  
@@ -79,31 +79,31 @@ public class UnitPitestsUpdatePlayer {
         UpdatePlayer.majFinDeTour(highLevel);
 
         // lowLevel (<3) : +2 puis -1 = +1
-        assertEquals(41, lowLevel.currenthealthpoints, "Low-level adventurer devrait gagner +1 PV");
+        assertEquals(41, lowLevel.currentHealthPoints, "Low-level adventurer devrait gagner +1 PV");
 
         // highLevel (>=3) : +2 sans malus
-        assertEquals(42, highLevel.currenthealthpoints, "High-level adventurer devrait gagner +2 PV");
+        assertEquals(42, highLevel.currentHealthPoints, "High-level adventurer devrait gagner +2 PV");
     } */
 
-    // Tests qui va vérifier les différents cas de la condition, soit elle est respectée, soit la valeur currenthealthpoints est égale à healthpoints/2 pour tuer la mutation.
+    // Tests qui va vérifier les différents cas de la condition, soit elle est respectée, soit la valeur currentHealthPoints est égale à healthPoints/2 pour tuer la mutation.
     @Test
-    @DisplayName("Test condition currenthealthpoints < healthpoints/2")
+    @DisplayName("Test condition currentHealthPoints < healthPoints/2")
     void testConditionHealthBelowHalf() {
         Player p = new Player("Leo", "Ranger", "DWARF", 100, new ArrayList<>());
 
-        // Cas où currenthealthpoints est juste en dessous de la moitié
-        p.healthpoints = 100;
-        p.currenthealthpoints = 49;
+        // Cas où currentHealthPoints est juste en dessous de la moitié
+        p.healthPoints = 100;
+        p.currentHealthPoints = 49;
         UpdatePlayer.majFinDeTour(p);
-        assertTrue(p.currenthealthpoints > 49, "Le joueur devrait regagner de la vie quand il est sous la moitié");
+        assertTrue(p.currentHealthPoints > 49, "Le joueur devrait regagner de la vie quand il est sous la moitié");
 
-        // Cas où currenthealthpoints est exactement à la moitié
+        // Cas où currentHealthPoints est exactement à la moitié
         Player p2 = new Player("Max", "Hero", "DWARF", 100, new ArrayList<>());
-        p2.healthpoints = 100;
-        p2.currenthealthpoints = 50;
+        p2.healthPoints = 100;
+        p2.currentHealthPoints = 50;
         UpdatePlayer.majFinDeTour(p2);
         // Il ne devrait pas y avoir de heal ici
-        assertEquals(50, p2.currenthealthpoints, "Pas de soin quand on est à la moitié ou plus");
+        assertEquals(50, p2.currentHealthPoints, "Pas de soin quand on est à la moitié ou plus");
     }
 
 }
