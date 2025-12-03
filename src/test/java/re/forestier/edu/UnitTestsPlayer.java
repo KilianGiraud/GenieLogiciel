@@ -3,7 +3,7 @@ package re.forestier.edu;
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.UpdatePlayer;
 import re.forestier.edu.rpg.Affichage;
-import re.forestier.edu.rpg.player;
+import re.forestier.edu.rpg.Player;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,13 +14,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UnitTestsPlayer {
-    /* Tests de player / removeMoney */
+    /* Tests de Player / removeMoney */
 
     //Tentative de retrait d'un montant supérieur à la quantité d'argent du joueur
     @Test
     @DisplayName("Impossible to have negative money")
     void testNegativeMoney() {
-        player p = new player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
 
         try {
             p.removeMoney(200);
@@ -35,7 +35,7 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Money removed")
     void testPositiveMoney() {
-        player p = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
 
         try {
             p.removeMoney(50);
@@ -45,14 +45,14 @@ public class UnitTestsPlayer {
         }
     }
 
-    /* Tests de player / addMoney */
+    /* Tests de Player / addMoney */
 
 
     // Tentative de d'ajouter une valeur négative d'argent
     @Test
     @DisplayName("Impossible to add negative money")
     void testAddNegativeMoney() {
-        player p = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
 
         try {
             p.addMoney(-40);
@@ -67,7 +67,7 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Nothing happened")
     void testAddNoMoney() {
-        player p = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
 
         try {
             p.addMoney(0);
@@ -82,7 +82,7 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Money added")
     void testAddMoney() {
-        player p = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
 
         try {
             p.addMoney(100);
@@ -92,7 +92,7 @@ public class UnitTestsPlayer {
         }
     }
 
-    /* Tests player / retrieveLevel */
+    /* Tests Player / retrieveLevel */
 
 
 
@@ -100,7 +100,7 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Access to level 2")
     void testGoToLvl2() {
-        player p = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
         final String[] objectList = {
         "Lookout Ring : Prevents surprise attacks",
         "Scroll of Stupidity : INT-2 when applied to an enemy",
@@ -143,11 +143,11 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Access to differents levels")
     void testGoToDifferentLvl() {
-        player p = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
-        player p2 = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
-        player p3 = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
-        player p4 = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
-        player p5 = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Player p2 = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Player p3 = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Player p4 = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Player p5 = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
 
         UpdatePlayer.addXp(p, 5);
         assertThat(p.retrieveLevel(), is(1));
@@ -173,22 +173,22 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Show User's XP")
     void testXP() {
-        player p = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
         int xp = p.getXp();
         assertThat(xp, is(0));
     }
 
-    /* Test player player */
+    /* Test Player Player */
 
 
     // Test de toutes les classes et du cas où la classe est nulle
     @Test
     @DisplayName("Show Player's class")
     void testClass() {
-        player p = new player("Kilian", "Denver le dernier Dinosaure", "", 100, new ArrayList<>());
-        player p1 = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
-        player p2 = new player("Kilian", "Denver le dernier Dinosaure", "DWARF", 100, new ArrayList<>());
-        player p3 = new player("Kilian", "Denver le dernier Dinosaure", "ARCHER", 100, new ArrayList<>());
+        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "", 100, new ArrayList<>());
+        Player p1 = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Player p2 = new Player("Kilian", "Denver le dernier Dinosaure", "DWARF", 100, new ArrayList<>());
+        Player p3 = new Player("Kilian", "Denver le dernier Dinosaure", "ARCHER", 100, new ArrayList<>());
         assertThat(p.getAvatarClass(), is(nullValue()));
         assertThat(p1.getAvatarClass(), is("ADVENTURER"));
         assertThat(p2.getAvatarClass(), is("DWARF"));

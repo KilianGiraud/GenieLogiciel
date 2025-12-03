@@ -3,7 +3,7 @@ package re.forestier.edu;
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.UpdatePlayer;
 import re.forestier.edu.rpg.Affichage;
-import re.forestier.edu.rpg.player;
+import re.forestier.edu.rpg.Player;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +18,7 @@ public class UnitPitestPlayer {
     @Test
     @DisplayName("Test removeMoney : comportement aux limites et exceptions")
     void testRemoveMoney() {
-        player p = new player("Kilian", "Rogue Trader", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Kilian", "Rogue Trader", "ADVENTURER", 100, new ArrayList<>());
         
         // Simule un joueur avec 100 pièces
         p.money = 100;
@@ -49,7 +49,7 @@ public class UnitPitestPlayer {
     @Test
     @DisplayName("Test getXp : doit retourner la valeur correcte")
     void testGetXp() {
-        player p = new player("Kilian", "Mage de Test", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Kilian", "Mage de Test", "ADVENTURER", 100, new ArrayList<>());
 
         // On fixe l'XP manuellement
         UpdatePlayer.addXp(p, 42);

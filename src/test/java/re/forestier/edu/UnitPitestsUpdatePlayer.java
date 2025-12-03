@@ -3,7 +3,7 @@ package re.forestier.edu;
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.UpdatePlayer;
 import re.forestier.edu.rpg.Affichage;
-import re.forestier.edu.rpg.player;
+import re.forestier.edu.rpg.Player;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,8 +20,8 @@ public class UnitPitestsUpdatePlayer {
     @Test
     @DisplayName("Tests des sorties booléennes")
     void testBoole() {
-        player p = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
-        player p2 = new player("Maximilien", "John le Magicien", "DWARF", 100, new ArrayList<>());
+        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Player p2 = new Player("Maximilien", "John le Magicien", "DWARF", 100, new ArrayList<>());
 
         Boolean testP1 = UpdatePlayer.addXp(p, 58); // Test pour que newLevel soit différent de currentLevel
         Boolean testP2 = UpdatePlayer.addXp(p2, 0); // Test pour que newLevel soit égal à currentLevel
@@ -36,7 +36,7 @@ public class UnitPitestsUpdatePlayer {
     @Test
     @DisplayName("Test du print KO")
     void testKO(){
-        player p = new player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
         p.currenthealthpoints = 0;
 
         java.io.ByteArrayOutputStream contenu = new java.io.ByteArrayOutputStream();
@@ -89,7 +89,7 @@ public class UnitPitestsUpdatePlayer {
     @Test
     @DisplayName("Test condition currenthealthpoints < healthpoints/2")
     void testConditionHealthBelowHalf() {
-        player p = new player("Leo", "Ranger", "DWARF", 100, new ArrayList<>());
+        Player p = new Player("Leo", "Ranger", "DWARF", 100, new ArrayList<>());
 
         // Cas où currenthealthpoints est juste en dessous de la moitié
         p.healthpoints = 100;
@@ -98,7 +98,7 @@ public class UnitPitestsUpdatePlayer {
         assertTrue(p.currenthealthpoints > 49, "Le joueur devrait regagner de la vie quand il est sous la moitié");
 
         // Cas où currenthealthpoints est exactement à la moitié
-        player p2 = new player("Max", "Hero", "DWARF", 100, new ArrayList<>());
+        Player p2 = new Player("Max", "Hero", "DWARF", 100, new ArrayList<>());
         p2.healthpoints = 100;
         p2.currenthealthpoints = 50;
         UpdatePlayer.majFinDeTour(p2);
