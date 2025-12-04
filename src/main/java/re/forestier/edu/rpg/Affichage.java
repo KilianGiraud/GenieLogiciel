@@ -1,8 +1,10 @@
 package re.forestier.edu.rpg;
 
+/*
+
 public class Affichage {
 
-    public static String afficherJoueur(Player player) {
+    public static String afficherJoueur(Archer player) {
         final String[] finalString = {"Joueur " + player.avatarName + " joué par " + player.playerName};
         finalString[0] += "\nNiveau : " + player.retrieveLevel() + " (XP totale : " + player.xp + ")";
         finalString[0] += "\n\nCapacités :";
@@ -17,3 +19,4 @@ public class Affichage {
         return finalString[0];
     }
 }
+*/
