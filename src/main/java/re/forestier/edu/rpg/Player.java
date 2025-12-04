@@ -2,6 +2,7 @@ package re.forestier.edu.rpg;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public abstract class Player {
 
@@ -21,6 +22,18 @@ public abstract class Player {
 
     public HashMap<String, Integer> abilities;
     public ArrayList<String> inventory;
+
+    private static final String[] objectList = {
+            "Lookout Ring : Prevents surprise attacks",
+            "Scroll of Stupidity : INT-2 when applied to an enemy",
+            "Draupnir : Increases XP gained by 100%",
+            "Magic Charm : Magic +10 for 5 rounds",
+            "Rune Staff of Curse : May burn your ennemies... Or yourself. Who knows?",
+            "Combat Edge : Well, that's an edge",
+            "Holy Elixir : Recover your HP"
+    };
+
+
     public Player(String playerName, String avatarName, String avatarClass, int money, ArrayList<String> inventory) {
 
         this.playerName = playerName;
@@ -70,6 +83,36 @@ public abstract class Player {
 
         return 5;
     }
+
+    public boolean addXp(int amount) {
+        int beforeLevel = retrieveLevel();
+        this.xp += amount;
+        int afterLevel = retrieveLevel();
+
+        if (afterLevel > beforeLevel) {
+            // Ajout d’un item random
+            addRandomItem();
+
+            // Mise à jour des abilities du niveau correspondant
+            onLevelUp(afterLevel);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    protected void onLevelUp(int newLevel) {
+        this.abilities.putAll(getAbilitiesForLevel(newLevel));
+    }
+
+
+    protected void addRandomItem() {
+        Random random = new Random();
+        inventory.add(objectList[random.nextInt(objectList.length)]);
+    }
+
+
 
     public int getXp() {
         return this.xp;
