@@ -1,23 +1,42 @@
-# Genie Logiciel : Refactoring
+# Génie Logiciel : Refactoring
 
-## Etape 1 : Avoir un code conventionnel
+Le refactoring a entièrement restructuré la logique du jeu pour la rendre **plus claire, maintenable et extensible**.
 
-Pour avoir un code **conventionnel**, il faut avant tout supprimer les commentaires inutiles *(comme la recette de cuisine en russe)* ou encore renommer les variables / classes / methodes selon la bonne methode *(CamelCase (Lower ou Upper selon le cas))*
+## Architecture du joueur
 
-## Etape 2 : Abstract class and Subclasses
+* `Player` devient une **classe abstraite**.
+* `Adventurer`, `Archer` et `Dwarf` deviennent des **sous-classes**.
+* Chaque classe gère désormais **ses propres capacités** et **sa logique de soin**.
+* Toute la logique commune (XP, niveaux, inventaire, KO…) est centralisée dans `Player`.
 
-Dans un premier temps, il était important de transformer la classe **Player** en classe abstraite et rendre les différents types *(ADVENTURER, ARCHER, DWARF)* en sous-classe pour une meilleure gestion du code
+## Système XP / Niveaux
 
-## Etape 3 : Gestion des XP et du level up
+* Création d’une **map de seuils d’XP** pour éviter les calculs répétés.
+* `addXp()` est simplifié et gère :
 
-La HashMap **abilitiesPerTypeAndLevel()** est horrible, illisible et pas pratique, pour ca on va pouvoir utiliser les sous-classes avec l'utilisation d'un **case switch** pour adapter les abilités en fonction des niveaux.
+    * la montée en niveau
+    * l’ajout d’un objet aléatoire
+    * la mise à jour des capacités du joueur
 
-On adapte ensuite la fonction **addXP()** pour qu'elle concorde avec cette modification.
+## Fin de tour (End-of-Turn)
 
-La fonction **retrieveLevel()** était également inadaptée, il était donc judicieux de séparer le tout en deux : 
+* La logique compliquée de `majFinDeTour()` est remplacée par :
 
-- Un HashMap **LEVEL_THRESHOLDS** : Pour ne pas avoir a les recréer à chaque appel
-- Une fonction **retrieveLevel()** : Pour établir le niveau du joueur
+    * `isKO()`
+    * `healLogic()` (surchargée dans chaque sous-classe)
+    * `capHealth()`
 
-Cela permettra par la suite d'implémenter bien plus facilement de **nouveaux niveaux**
+L’ensemble est beaucoup plus lisible et cohérent.
 
+## Inventaire & Objets
+
+* Attribution des objets aléatoires déplacée dans `Player`.
+* Suppression de la classe inutile `UpdatePlayer`.
+
+## Tests
+
+* Tous les tests ont été adaptés à l’architecture finale.
+* Le projet atteint un niveau élevé de couverture (≈90%).
+* Les branches non couvertes concernent uniquement les tableaux de stats des sous-classes (pas critiques).
+
+---
