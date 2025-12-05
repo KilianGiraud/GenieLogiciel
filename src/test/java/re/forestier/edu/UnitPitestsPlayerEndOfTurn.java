@@ -3,18 +3,15 @@ package re.forestier.edu;
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.Adventurer;
 import re.forestier.edu.rpg.Dwarf;
-import re.forestier.edu.rpg.UpdatePlayer;
 // import re.forestier.edu.rpg.Affichage;
-import re.forestier.edu.rpg.Player;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.beans.Transient;
 import java.util.ArrayList;
 
 
-public class UnitPitestsUpdatePlayer {
+public class UnitPitestsPlayerEndOfTurn {
 
     /* addXp */
 
@@ -46,7 +43,7 @@ public class UnitPitestsUpdatePlayer {
         System.setOut(new java.io.PrintStream(contenu));
 
         try {
-            UpdatePlayer.majFinDeTour(p);
+            p.endOfTurn();
 
             // Vérification que le message de KO est bien affiché
 
@@ -96,14 +93,14 @@ public class UnitPitestsUpdatePlayer {
         // Cas où currentHealthPoints est juste en dessous de la moitié
         p.healthPoints = 100;
         p.currentHealthPoints = 49;
-        UpdatePlayer.majFinDeTour(p);
+        p.endOfTurn();
         assertTrue(p.currentHealthPoints > 49, "Le joueur devrait regagner de la vie quand il est sous la moitié");
 
         // Cas où currentHealthPoints est exactement à la moitié
         Dwarf p2 = new Dwarf("Max", "Hero", 100, new ArrayList<>());
         p2.healthPoints = 100;
         p2.currentHealthPoints = 50;
-        UpdatePlayer.majFinDeTour(p2);
+        p2.endOfTurn();
         // Il ne devrait pas y avoir de heal ici
         assertEquals(50, p2.currentHealthPoints, "Pas de soin quand on est à la moitié ou plus");
     }

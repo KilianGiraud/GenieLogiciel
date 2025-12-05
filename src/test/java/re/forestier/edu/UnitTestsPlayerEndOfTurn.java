@@ -1,35 +1,29 @@
 package re.forestier.edu;
 
 import org.junit.jupiter.api.*;
-import re.forestier.edu.rpg.UpdatePlayer;
-import re.forestier.edu.rpg.Affichage;
+import re.forestier.edu.rpg.Adventurer;
+import re.forestier.edu.rpg.Archer;
+import re.forestier.edu.rpg.Dwarf;
+// import re.forestier.edu.rpg.Affichage;
 import re.forestier.edu.rpg.Player;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UnitTestsUpdatePlayer {
-     /* Tests UpdatePlayer */
+public class UnitTestsPlayerEndOfTurn {
+     /* Tests players */
 
-    // Fonction qui va executer la fonction "UpdatePlayer"
-    @Test
-    @DisplayName("Test UpdatePlayer")
-    void testUpdatePlayer() {
-        new UpdatePlayer();
-    }
-
-    /* Tests UpdatePlayer / majFinDeTour */
+    /* Tests players / endOfTurn */
 
 
     // Fonction qui va tester la fin de tour avec un joueur sans vie pour vérifier s'il est mort
     @Test
     @DisplayName("Dead Player")
     void testDeadPlayer() {
-        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
-        UpdatePlayer.majFinDeTour(p);
+        Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
+        p.endOfTurn();
         assertThat(p.currentHealthPoints, is(0));
     }
 
@@ -39,9 +33,9 @@ public class UnitTestsUpdatePlayer {
     @DisplayName("Alive player for all classes with all type of life")
     void testAlivePlayer() {
         List<Player> players = List.of(
-            new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>()),
-            new Player("Maximilien", "Olive et Tom", "ARCHER", 100, new ArrayList<>()),
-            new Player("Hugolin", "Samsam", "DWARF", 100, new ArrayList<>())
+            new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>()),
+            new Archer("Maximilien", "Olive et Tom", 100, new ArrayList<>()),
+            new Dwarf("Hugolin", "Samsam", 100, new ArrayList<>())
         );
     
         // Différents cas de vie : {currentHealthPoints, heanlthpoints}
@@ -56,7 +50,7 @@ public class UnitTestsUpdatePlayer {
             for (Player p : players) {
                 p.currentHealthPoints = scenario[0];
                 p.healthPoints = scenario[1];
-                UpdatePlayer.majFinDeTour(p);
+                p.endOfTurn();
             }
         }
     }
@@ -67,8 +61,8 @@ public class UnitTestsUpdatePlayer {
     @Test
     @DisplayName("Conditional Inventory for DWARF and ARCHER with low life")
     void testConditionalinventoryPlayer() {
-        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "DWARF", 100, new ArrayList<>());
-        Player p1 = new Player("Hugolin", "Samsam", "ARCHER", 100, new ArrayList<>());
+        Dwarf p = new Dwarf("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
+        Archer p1 = new Archer("Hugolin", "Samsam", 100, new ArrayList<>());
 
         p.currentHealthPoints = 100;
         p.healthPoints = 1000;
@@ -78,8 +72,8 @@ public class UnitTestsUpdatePlayer {
         p.inventory.add("Holy Elixir");
         p1.inventory.add("Magic Bow");
 
-        UpdatePlayer.majFinDeTour(p);
-        UpdatePlayer.majFinDeTour(p1);
+        p.endOfTurn();
+        p1.endOfTurn();
 
         assertThat(p.currentHealthPoints, is(102));
         assertThat(p1.currentHealthPoints, is(112));
