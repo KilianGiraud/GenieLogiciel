@@ -38,6 +38,15 @@ public class Archer extends Player {
         return stats;
     }
 
+    @Override
+    protected void healLogic() {
+        currentHealthPoints += 1;
+        if (inventory.contains("Magic Bow")) {
+            currentHealthPoints += currentHealthPoints / 8 - 1;
+        }
+    }
+
+
 }
 
 

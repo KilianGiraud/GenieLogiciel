@@ -38,5 +38,15 @@ public class Adventurer extends Player {
 
         return stats;
     }
+
+    @Override
+    protected void healLogic() {
+        currentHealthPoints += 2;
+
+        if (retrieveLevel() < 3) {
+            currentHealthPoints -= 1;
+        }
+    }
+
 }
 

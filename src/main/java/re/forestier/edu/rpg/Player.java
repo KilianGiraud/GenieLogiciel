@@ -116,8 +116,42 @@ public abstract class Player {
         return this.xp;
     }
 
+    public void endOfTurn() {
+        if (isKO()) {
+            onKO();
+            return;
+        }
+
+        if (isLowHealth()) {
+            healLogic();  // spécifique à chaque type de joueur
+        }
+
+        capHealth(); // logique commune finale
+    }
+
+    protected boolean isLowHealth() {
+        return currentHealthPoints < healthPoints / 2;
+    }
+
+    protected void capHealth() {
+        if (currentHealthPoints > healthPoints) {
+            currentHealthPoints = healthPoints;
+        }
+    }
+
+    protected void healLogic() {
+        // default state : nothing
+    }
+
+
+
+
     public boolean isKO() {
         return currentHealthPoints <= 0;
+    }
+
+    protected void onKO() {
+        System.out.println("Le joueur est KO !");
     }
 
 
