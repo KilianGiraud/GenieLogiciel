@@ -112,10 +112,13 @@ public abstract class Player {
         inventory.add(objectList[random.nextInt(objectList.length)]);
     }
 
-
-
     public int getXp() {
         return this.xp;
     }
+
+    public boolean isKO() {
+        return currentHealthPoints <= 0;
+    }
+
 
 }

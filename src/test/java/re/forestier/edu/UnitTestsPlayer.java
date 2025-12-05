@@ -1,9 +1,9 @@
 package re.forestier.edu;
 
 import org.junit.jupiter.api.*;
-import re.forestier.edu.rpg.UpdatePlayer;
+import re.forestier.edu.rpg.*;
 import re.forestier.edu.rpg.Affichage;
-import re.forestier.edu.rpg.Player;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -100,7 +100,7 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Access to level 2")
     void testGoToLvl2() {
-        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
         final String[] objectList = {
         "Lookout Ring : Prevents surprise attacks",
         "Scroll of Stupidity : INT-2 when applied to an enemy",
@@ -115,7 +115,7 @@ public class UnitTestsPlayer {
         Map<String, Integer> oldAbilities = new HashMap<>(p.abilities);
 
         try {
-            UpdatePlayer.addXp(p, 58);
+            p.addXp(58);
             p.retrieveLevel();
             
             // Vérifie que la taille a bien augmenté de 1
@@ -143,25 +143,25 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Access to differents levels")
     void testGoToDifferentLvl() {
-        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
-        Player p2 = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
-        Player p3 = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
-        Player p4 = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
-        Player p5 = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
+        Adventurer p2 = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
+        Adventurer p3 = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
+        Adventurer p4 = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
+        Adventurer p5 = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
 
-        UpdatePlayer.addXp(p, 5);
+        p.addXp(5);
         assertThat(p.retrieveLevel(), is(1));
 
-        UpdatePlayer.addXp(p2, 10);
+        p2.addXp(10);
         assertThat(p2.retrieveLevel(), is(2));
 
-        UpdatePlayer.addXp(p3, 27);
+        p3.addXp(27);
         assertThat(p3.retrieveLevel(), is(3));
 
-        UpdatePlayer.addXp(p4, 57);
+        p4.addXp(57);
         assertThat(p4.retrieveLevel(), is(4));
 
-        UpdatePlayer.addXp(p5, 111);
+        p5.addXp(111);
         assertThat(p5.retrieveLevel(), is(5));
 
 
@@ -173,7 +173,7 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Show User's XP")
     void testXP() {
-        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
         int xp = p.getXp();
         assertThat(xp, is(0));
     }
@@ -185,11 +185,9 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Show Player's class")
     void testClass() {
-        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "", 100, new ArrayList<>());
-        Player p1 = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
-        Player p2 = new Player("Kilian", "Denver le dernier Dinosaure", "DWARF", 100, new ArrayList<>());
-        Player p3 = new Player("Kilian", "Denver le dernier Dinosaure", "ARCHER", 100, new ArrayList<>());
-        assertThat(p.getAvatarClass(), is(nullValue()));
+        Adventurer p1 = new Adventurer("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Dwarf p2 = new Dwarf("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
+        Archer p3 = new Archer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
         assertThat(p1.getAvatarClass(), is("ADVENTURER"));
         assertThat(p2.getAvatarClass(), is("DWARF"));
         assertThat(p3.getAvatarClass(), is("ARCHER"));

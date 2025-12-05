@@ -1,8 +1,9 @@
 package re.forestier.edu;
 
 import org.junit.jupiter.api.*;
+import re.forestier.edu.rpg.Adventurer;
 import re.forestier.edu.rpg.UpdatePlayer;
-import re.forestier.edu.rpg.Affichage;
+// import re.forestier.edu.rpg.Affichage;
 import re.forestier.edu.rpg.Player;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -18,7 +19,7 @@ public class UnitPitestPlayer {
     @Test
     @DisplayName("Test removeMoney : comportement aux limites et exceptions")
     void testRemoveMoney() {
-        Player p = new Player("Kilian", "Rogue Trader", "ADVENTURER", 100, new ArrayList<>());
+        Adventurer p = new Adventurer("Kilian", "Rogue Trader", 100, new ArrayList<>());
         
         // Simule un joueur avec 100 pièces
         p.money = 100;
@@ -49,16 +50,16 @@ public class UnitPitestPlayer {
     @Test
     @DisplayName("Test getXp : doit retourner la valeur correcte")
     void testGetXp() {
-        Player p = new Player("Kilian", "Mage de Test", "ADVENTURER", 100, new ArrayList<>());
+        Adventurer p = new Adventurer("Kilian", "Mage de Test", 100, new ArrayList<>());
 
         // On fixe l'XP manuellement
-        UpdatePlayer.addXp(p, 42);
+        p.addXp(42);
 
         // On vérifie que getXp() retourne bien cette valeur
         assertEquals(42, p.getXp(), "getXp() doit retourner la valeur réelle du champ xp");
 
         // Bonus : on modifie l'XP et on revérifie pour s’assurer que ce n’est pas toujours 0
-        UpdatePlayer.addXp(p, 958);;
+        p.addXp(958);;
         assertEquals(1000, p.getXp(), "getXp() doit refléter la nouvelle valeur de xp");
     }
 
