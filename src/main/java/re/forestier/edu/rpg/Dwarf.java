@@ -36,6 +36,8 @@ public class Dwarf extends Player {
         return stats;
     }
 
+    // Overrided method specific to each player
+
     @Override
     protected void healLogic() {
         if (getInventory().contains("Holy Elixir")) {

@@ -23,6 +23,7 @@ public class UnitTestsPlayerEndOfTurn {
     @DisplayName("Dead Player")
     void testDeadPlayer() {
         Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
+        p.setHealthPoints(0);
         p.endOfTurn();
         assertThat(p.getCurrentHealthPoints(), is(0));
     }

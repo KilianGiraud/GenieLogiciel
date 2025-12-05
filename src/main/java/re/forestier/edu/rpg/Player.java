@@ -42,6 +42,10 @@ public abstract class Player {
         this.money = money;
         this.inventory = inventory;
 
+
+        // A new player always starts at level 1 with base stats and full health.
+        // Subclasses define the actual abilities through getAbilitiesForLevel().
+
         this.level = 1;
         this.healthPoints = 10;
         this.currentHealthPoints = 10;
@@ -66,6 +70,9 @@ public abstract class Player {
         money = money + (value != null ? value : 0);
     }
 
+
+    // XP thresholds for each level based on the original game progression formula.
+    // retrieveLevel() uses these values to determine the correct level at any time.
     private static final HashMap<Integer, Integer> LEVEL_THRESHOLDS = new HashMap<>() {{
         put(2, 10); // 1*10 + ((2*0)/4)
         put(3, 27); // 2*10 + ((3*10)/4)
@@ -84,16 +91,21 @@ public abstract class Player {
         return 5;
     }
 
+    // XP addition triggers a level check.
+    // If the player levels up:
+    //  - a random bonus item is granted
+    //  - the abilities for the new level are applied
+    // This mirrors the original RPG mechanics.
+
     public boolean addXp(int amount) {
         int beforeLevel = retrieveLevel();
         this.xp += amount;
         int afterLevel = retrieveLevel();
 
         if (afterLevel > beforeLevel) {
-            // Ajout d’un item random
+
             addRandomItem();
 
-            // Mise à jour des abilities du niveau correspondant
             onLevelUp(afterLevel);
 
             return true;
@@ -170,17 +182,23 @@ public abstract class Player {
     /* END SETTERS */
 
 
+    // End-of-turn healing logic:
+    // 1. If the player is KO (0 HP), print message and stop.
+    // 2. If below 50% HP, each subclass applies its own healing logic.
+    // 3. HP is capped to avoid overhealing (e.g., effects from items).
+
     public void endOfTurn() {
+
         if (isKO()) {
             onKO();
             return;
         }
 
         if (isLowHealth()) {
-            healLogic();  // spécifique à chaque type de joueur
+            healLogic();  // specific to each type of player
         }
 
-        capHealth(); // logique commune finale
+        capHealth(); // final common logic
     }
 
     protected boolean isLowHealth() {
@@ -193,12 +211,12 @@ public abstract class Player {
         }
     }
 
+    // Default heal behavior: no healing.
+    // Subclasses override this to implement their own regeneration rules.
+
     protected void healLogic() {
         // default state : nothing
     }
-
-
-
 
     public boolean isKO() {
         return currentHealthPoints <= 0;

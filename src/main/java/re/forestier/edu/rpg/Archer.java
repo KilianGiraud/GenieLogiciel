@@ -38,6 +38,8 @@ public class Archer extends Player {
         return stats;
     }
 
+    // Overrided method specific to each player
+
     @Override
     protected void healLogic() {
         setCurrentHealthPoints(getCurrentHealthPoints() + 1);
