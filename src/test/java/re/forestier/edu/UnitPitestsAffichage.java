@@ -1,7 +1,7 @@
 package re.forestier.edu;
 
 import org.junit.jupiter.api.*;
-import re.forestier.edu.rpg.UpdatePlayer;
+import re.forestier.edu.rpg.Adventurer;
 import re.forestier.edu.rpg.Affichage;
 import re.forestier.edu.rpg.Player;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -16,7 +16,7 @@ public class UnitPitestsAffichage {
     @Test
     @DisplayName("Item added")
     void testAddItemPitest() {
-        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
         p.inventory.add("Maximilien");
         String affichage = Affichage.afficherJoueur(p);
         assertThat(affichage, containsString("Maximilien"));

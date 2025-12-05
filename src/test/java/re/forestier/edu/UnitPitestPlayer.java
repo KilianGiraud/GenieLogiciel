@@ -2,8 +2,7 @@ package re.forestier.edu;
 
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.Adventurer;
-import re.forestier.edu.rpg.UpdatePlayer;
-// import re.forestier.edu.rpg.Affichage;
+import re.forestier.edu.rpg.Affichage;
 import re.forestier.edu.rpg.Player;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;

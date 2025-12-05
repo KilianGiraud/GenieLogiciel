@@ -2,7 +2,7 @@ package re.forestier.edu;
 
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.*;
-// import re.forestier.edu.rpg.Affichage;
+import re.forestier.edu.rpg.Affichage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
