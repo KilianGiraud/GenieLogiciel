@@ -6,8 +6,8 @@ public class Affichage {
 
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Joueur ").append(player.avatarName)
-                .append(" joué par ").append(player.playerName);
+        sb.append("Joueur ").append(player.getAvatarName())
+                .append(" joué par ").append(player.getPlayerName());
 
         sb.append("\nClasse : ").append(player.getClass().getSimpleName());
 
@@ -15,15 +15,15 @@ public class Affichage {
                 .append(" (XP totale : ").append(player.getXp()).append(")");
 
         sb.append("\n\nCapacités :");
-        player.abilities.forEach((name, level) ->
+        player.getAbilities().forEach((name, level) ->
                 sb.append("\n   ").append(name).append(" : ").append(level)
         );
 
         sb.append("\n\nInventaire :");
-        if (player.inventory.isEmpty()) {
+        if (player.getInventory().isEmpty()) {
             sb.append("\n   (vide)");
         } else {
-            player.inventory.forEach(item ->
+            player.getInventory().forEach(item ->
                     sb.append("\n   ").append(item)
             );
         }

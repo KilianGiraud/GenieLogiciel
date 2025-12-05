@@ -25,7 +25,7 @@ public class Adventurer extends Player {
                 break;
             case 3:
                 stats.put("ATK", 5);
-                stats.put("ATC", 1);
+                stats.put("ALC", 1);
                 break;
             case 4:
                 stats.put("DEF", 3);
@@ -41,10 +41,10 @@ public class Adventurer extends Player {
 
     @Override
     protected void healLogic() {
-        currentHealthPoints += 2;
+        setCurrentHealthPoints(getCurrentHealthPoints() + 2);
 
         if (retrieveLevel() < 3) {
-            currentHealthPoints -= 1;
+            setCurrentHealthPoints(getCurrentHealthPoints() - 1);
         }
     }
 

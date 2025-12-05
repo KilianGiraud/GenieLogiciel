@@ -20,9 +20,9 @@ public class UnitTestsAffichage {
     @DisplayName("Item added")
     void testAddItem() {
         Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
-        p.inventory.add("Maximilien");
+        p.getInventory().add("Maximilien");
         Affichage.afficherJoueur(p);
-        assertThat(p.inventory, hasItem("Maximilien"));
+        assertThat(p.getInventory(), hasItem("Maximilien"));
     }
 
     // Fonction qui va executer la fonction "Affichage"

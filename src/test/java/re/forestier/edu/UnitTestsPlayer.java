@@ -24,7 +24,7 @@ public class UnitTestsPlayer {
 
         try {
             p.removeMoney(200);
-            assertThat(p.money, is(-100));
+            assertThat(p.getMoney(), is(-100));
         } catch (Exception e) {
             assertThat(e, is(instanceOf(IllegalArgumentException.class)));
         }
@@ -39,7 +39,7 @@ public class UnitTestsPlayer {
 
         try {
             p.removeMoney(50);
-            assertThat(p.money, is(50));
+            assertThat(p.getMoney(), is(50));
         } catch (Exception e) {
             assertThat(e, is(instanceOf(IllegalArgumentException.class)));
         }
@@ -56,7 +56,7 @@ public class UnitTestsPlayer {
 
         try {
             p.addMoney(-40);
-            assertThat(p.money, is(60));
+            assertThat(p.getMoney(), is(60));
         } catch (Exception e) {
             assertThat(e, is(instanceOf(IllegalArgumentException.class)));
         }
@@ -71,7 +71,7 @@ public class UnitTestsPlayer {
 
         try {
             p.addMoney(0);
-            assertThat(p.money, is(100));
+            assertThat(p.getMoney(), is(100));
         } catch (Exception e) {
             assertThat(e, is(instanceOf(IllegalArgumentException.class)));
         }
@@ -86,7 +86,7 @@ public class UnitTestsPlayer {
 
         try {
             p.addMoney(100);
-            assertThat(p.money, is(200));
+            assertThat(p.getMoney(), is(200));
         } catch (Exception e) {
             assertThat(e, is(instanceOf(IllegalArgumentException.class)));
         }
@@ -111,22 +111,22 @@ public class UnitTestsPlayer {
         "Holy Elixir : Recover your HP"
         };
 
-        int oldSize = p.inventory.size();
-        Map<String, Integer> oldAbilities = new HashMap<>(p.abilities);
+        int oldSize = p.getInventory().size();
+        Map<String, Integer> oldAbilities = new HashMap<>(p.getAbilities());
 
         try {
             p.addXp(58);
             p.retrieveLevel();
             
             // Vérifie que la taille a bien augmenté de 1
-            assertThat(p.inventory.size(), is(oldSize + 1));
+            assertThat(p.getInventory().size(), is(oldSize + 1));
             
             // Vérifie que le dernier objet ajouté est bien dans la liste des objets possibles
-            String lastAdded = p.inventory.get(p.inventory.size() - 1);
+            String lastAdded = p.getInventory().get(p.getInventory().size() - 1);
             assertThat(Arrays.asList(objectList), hasItem(lastAdded));
 
             // Vérifie qu'au moins une ability a changé (ajoutée ou upgradée)
-            boolean abilityChanged = p.abilities.entrySet().stream().anyMatch(entry ->
+            boolean abilityChanged = p.getAbilities().entrySet().stream().anyMatch(entry ->
                 !oldAbilities.containsKey(entry.getKey()) || // nouvelle clé
                 !oldAbilities.get(entry.getKey()).equals(entry.getValue()) // valeur upgradée
             );

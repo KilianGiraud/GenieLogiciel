@@ -17,7 +17,7 @@ public class UnitPitestsAffichage {
     @DisplayName("Item added")
     void testAddItemPitest() {
         Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
-        p.inventory.add("Maximilien");
+        p.getInventory().add("Maximilien");
         String affichage = Affichage.afficherJoueur(p);
         assertThat(affichage, containsString("Maximilien"));
     }

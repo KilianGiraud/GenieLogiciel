@@ -24,7 +24,7 @@ public class UnitTestsPlayerEndOfTurn {
     void testDeadPlayer() {
         Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
         p.endOfTurn();
-        assertThat(p.currentHealthPoints, is(0));
+        assertThat(p.getCurrentHealthPoints(), is(0));
     }
 
 
@@ -48,8 +48,8 @@ public class UnitTestsPlayerEndOfTurn {
     
         for (int[] scenario : lifeScenarios) {
             for (Player p : players) {
-                p.currentHealthPoints = scenario[0];
-                p.healthPoints = scenario[1];
+                p.setCurrentHealthPoints(scenario[0]);
+                p.setHealthPoints(scenario[1]);
                 p.endOfTurn();
             }
         }
@@ -64,19 +64,19 @@ public class UnitTestsPlayerEndOfTurn {
         Dwarf p = new Dwarf("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
         Archer p1 = new Archer("Hugolin", "Samsam", 100, new ArrayList<>());
 
-        p.currentHealthPoints = 100;
-        p.healthPoints = 1000;
-        p1.currentHealthPoints = 100;
-        p1.healthPoints = 1000;
+        p.setCurrentHealthPoints(100);
+        p.setHealthPoints(1000);
+        p1.setCurrentHealthPoints(100);
+        p1.setHealthPoints(1000);
 
-        p.inventory.add("Holy Elixir");
-        p1.inventory.add("Magic Bow");
+        p.getInventory().add("Holy Elixir");
+        p1.getInventory().add("Magic Bow");
 
         p.endOfTurn();
         p1.endOfTurn();
 
-        assertThat(p.currentHealthPoints, is(102));
-        assertThat(p1.currentHealthPoints, is(112));
+        assertThat(p.getCurrentHealthPoints(), is(102));
+        assertThat(p1.getCurrentHealthPoints(), is(112));
 
     }
 }

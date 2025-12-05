@@ -38,10 +38,10 @@ public class Dwarf extends Player {
 
     @Override
     protected void healLogic() {
-        if (inventory.contains("Holy Elixir")) {
-            currentHealthPoints += 1;
+        if (getInventory().contains("Holy Elixir")) {
+            setCurrentHealthPoints(getCurrentHealthPoints() + 1);
         }
-        currentHealthPoints += 1;
+        setCurrentHealthPoints(getCurrentHealthPoints() + 1);
     }
 
 }

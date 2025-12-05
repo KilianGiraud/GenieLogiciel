@@ -8,20 +8,20 @@ public abstract class Player {
 
     public abstract HashMap<String, Integer> getAbilitiesForLevel(int level);
 
-    public String playerName;
-    public String avatarName;
+    private String playerName;
+    private String avatarName;
     protected String avatarClass;
 
-    public Integer money;
+    private Integer money;
 
-    public int level;
-    public int healthPoints;
-    public int currentHealthPoints;
+    private int level;
+    private int healthPoints;
+    private int currentHealthPoints;
     protected int xp;
 
 
-    public HashMap<String, Integer> abilities;
-    public ArrayList<String> inventory;
+    private HashMap<String, Integer> abilities;
+    private ArrayList<String> inventory;
 
     private static final String[] objectList = {
             "Lookout Ring : Prevents surprise attacks",
@@ -112,9 +112,63 @@ public abstract class Player {
         inventory.add(objectList[random.nextInt(objectList.length)]);
     }
 
+    /* GETTERS */
+
     public int getXp() {
         return this.xp;
     }
+
+    public String getPlayerName(){
+        return this.playerName;
+    }
+
+    public String getAvatarName(){
+        return this.avatarName;
+    }
+
+    public int getMoney(){
+        return this.money;
+    }
+
+    public int getHealthPoints(){
+        return this.healthPoints;
+    }
+
+    public int getCurrentHealthPoints(){
+        return this.currentHealthPoints;
+    }
+
+    public HashMap<String, Integer> getAbilities(){
+        return this.abilities;
+    }
+
+    public ArrayList<String> getInventory(){
+        return this.inventory;
+    }
+
+    /* END GETTERS */
+
+    /* SETTERS */
+
+    public void setMoney(int value){
+        this.money = value;
+    }
+
+    public void setCurrentHealthPoints(int value){
+        this.currentHealthPoints = value;
+    }
+
+    public void setHealthPoints(int value){
+        this.healthPoints = value;
+    }
+
+    public void setInventory(ArrayList<String> inventory) {
+        this.inventory = inventory;
+    }
+
+
+    /* END SETTERS */
+
 
     public void endOfTurn() {
         if (isKO()) {

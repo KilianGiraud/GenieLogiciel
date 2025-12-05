@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import re.forestier.edu.rpg.Adventurer;
 import re.forestier.edu.rpg.Affichage;
-import re.forestier.edu.rpg.UpdatePlayer;
 import re.forestier.edu.rpg.Player;
 
 import java.util.ArrayList;
@@ -20,8 +19,8 @@ public class GlobalTest {
     void testAffichageBase() {
         Adventurer player = new Adventurer("Florian", "Gnognak le Barbare", 200, new ArrayList<>());
         player.addXp(20);
-        player.inventory = new ArrayList<>();
+        player.setInventory(new ArrayList<>());
 
-        // verify(Affichage.afficherJoueur(player));
+        verify(Affichage.afficherJoueur(player));
     }
 }

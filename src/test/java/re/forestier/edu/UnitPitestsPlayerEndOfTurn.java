@@ -36,7 +36,7 @@ public class UnitPitestsPlayerEndOfTurn {
     @DisplayName("Test du print KO")
     void testKO(){
         Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
-        p.currentHealthPoints = 0;
+        p.setCurrentHealthPoints(0);
 
         java.io.ByteArrayOutputStream contenu = new java.io.ByteArrayOutputStream();
         java.io.PrintStream original = System.out;
@@ -91,18 +91,18 @@ public class UnitPitestsPlayerEndOfTurn {
         Dwarf p = new Dwarf("Leo", "Ranger", 100, new ArrayList<>());
 
         // Cas où currentHealthPoints est juste en dessous de la moitié
-        p.healthPoints = 100;
-        p.currentHealthPoints = 49;
+        p.setHealthPoints(100);
+        p.setCurrentHealthPoints(49);
         p.endOfTurn();
-        assertTrue(p.currentHealthPoints > 49, "Le joueur devrait regagner de la vie quand il est sous la moitié");
+        assertTrue(p.getCurrentHealthPoints() > 49, "Le joueur devrait regagner de la vie quand il est sous la moitié");
 
         // Cas où currentHealthPoints est exactement à la moitié
         Dwarf p2 = new Dwarf("Max", "Hero", 100, new ArrayList<>());
-        p2.healthPoints = 100;
-        p2.currentHealthPoints = 50;
+        p2.setHealthPoints(100);
+        p2.setCurrentHealthPoints(50);
         p2.endOfTurn();
         // Il ne devrait pas y avoir de heal ici
-        assertEquals(50, p2.currentHealthPoints, "Pas de soin quand on est à la moitié ou plus");
+        assertEquals(50, p2.getCurrentHealthPoints(), "Pas de soin quand on est à la moitié ou plus");
     }
 
 }

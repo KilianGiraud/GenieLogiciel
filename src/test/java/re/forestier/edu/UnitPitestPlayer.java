@@ -21,21 +21,21 @@ public class UnitPitestPlayer {
         Adventurer p = new Adventurer("Kilian", "Rogue Trader", 100, new ArrayList<>());
         
         // Simule un joueur avec 100 pièces
-        p.money = 100;
+        p.setMoney(100);
 
         // Cas normal : il retire moins que ce qu’il a
         assertDoesNotThrow(() -> p.removeMoney(50),
             "Ne doit pas lever d'exception si le joueur a assez d'argent");
-        assertEquals(50, p.money, "L'argent doit être décrémenté correctement");
+        assertEquals(50, p.getMoney(), "L'argent doit être décrémenté correctement");
 
         // Cas limite : il retire exactement tout son argent
-        p.money = 100;
+        p.setMoney(100);
         assertDoesNotThrow(() -> p.removeMoney(100),
             "Ne doit pas lever d'exception si le joueur tombe à zéro");
-        assertEquals(0, p.money, "L'argent doit tomber à zéro exactement");
+        assertEquals(0, p.getMoney(), "L'argent doit tomber à zéro exactement");
 
         // Cas d’erreur : il essaie de retirer plus que ce qu’il a
-        p.money = 100;
+        p.setMoney(100);
         Exception ex = assertThrows(IllegalArgumentException.class, () -> p.removeMoney(101),
             "Doit lever une exception si le joueur devient négatif");
         assertEquals("Player can't have a negative money!", ex.getMessage(),
