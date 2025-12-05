@@ -39,10 +39,15 @@ public class Goblin extends Player{
     }
 
     // Overrided method specific to each player
+    // Heal Logic not indicated in subject so here is an idea I had.
 
     @Override
     protected void healLogic() {
-        // TO IMPLEMENT
+        int alc = this.getAbilities().getOrDefault("ALC", 0);
+        int healAmount = alc / 2;
+
+        setCurrentHealthPoints(getCurrentHealthPoints() + healAmount);
     }
+
 
 }
