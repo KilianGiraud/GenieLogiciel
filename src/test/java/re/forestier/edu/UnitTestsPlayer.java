@@ -2,7 +2,7 @@ package re.forestier.edu;
 
 import org.junit.jupiter.api.*;
 import re.forestier.edu.rpg.*;
-import re.forestier.edu.rpg.Affichage;
+// import re.forestier.edu.rpg.Affichage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -20,7 +20,7 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Impossible to have negative money")
     void testNegativeMoney() {
-        Player p = new Player("Florian", "Grognak le barbare", "ADVENTURER", 100, new ArrayList<>());
+        Adventurer p = new Adventurer("Florian", "Grognak le barbare", 100, new ArrayList<>());
 
         try {
             p.removeMoney(200);
@@ -35,7 +35,7 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Money removed")
     void testPositiveMoney() {
-        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
 
         try {
             p.removeMoney(50);
@@ -52,7 +52,7 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Impossible to add negative money")
     void testAddNegativeMoney() {
-        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
 
         try {
             p.addMoney(-40);
@@ -67,7 +67,7 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Nothing happened")
     void testAddNoMoney() {
-        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
 
         try {
             p.addMoney(0);
@@ -82,7 +82,7 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Money added")
     void testAddMoney() {
-        Player p = new Player("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
 
         try {
             p.addMoney(100);
@@ -185,7 +185,7 @@ public class UnitTestsPlayer {
     @Test
     @DisplayName("Show Player's class")
     void testClass() {
-        Adventurer p1 = new Adventurer("Kilian", "Denver le dernier Dinosaure", "ADVENTURER", 100, new ArrayList<>());
+        Adventurer p1 = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
         Dwarf p2 = new Dwarf("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
         Archer p3 = new Archer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
         assertThat(p1.getAvatarClass(), is("ADVENTURER"));
