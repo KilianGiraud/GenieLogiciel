@@ -17,30 +17,34 @@ public abstract class Player {
     private int level;
     private int healthPoints;
     private int currentHealthPoints;
+    private final int maxWeight;
+    private int currentWeight;
     protected int xp;
 
 
     private HashMap<String, Integer> abilities;
-    private ArrayList<String> inventory;
+    private ArrayList<Item> inventory;
 
-    private static final String[] objectList = {
-            "Lookout Ring : Prevents surprise attacks",
-            "Scroll of Stupidity : INT-2 when applied to an enemy",
-            "Draupnir : Increases XP gained by 100%",
-            "Magic Charm : Magic +10 for 5 rounds",
-            "Rune Staff of Curse : May burn your ennemies... Or yourself. Who knows?",
-            "Combat Edge : Well, that's an edge",
-            "Holy Elixir : Recover your HP"
+    private static final Item[] objectList = {
+            new Item("Lookout Ring", "Prevents surprise attacks", 1, 50),
+            new Item("Scroll of Stupidity", "INT -2 when applied to an enemy", 1, 10),
+            new Item("Draupnir", "Increases XP gained by 100%", 2, 80),
+            new Item("Magic Charm", "Magic +10 for 5 rounds", 1, 40),
+            new Item("Rune Staff of Curse", "May burn enemies or yourself", 5, 200),
+            new Item("Combat Edge", "Sharp weapon", 3, 100),
+            new Item("Holy Elixir", "Recover HP", 1, 30)
     };
 
 
-    public Player(String playerName, String avatarName, String avatarClass, int money, ArrayList<String> inventory) {
+
+    public Player(String playerName, String avatarName, String avatarClass, int money, ArrayList<Item> inventory, int maxWeight) {
 
         this.playerName = playerName;
         this.avatarName = avatarName;
         this.avatarClass = avatarClass;
         this.money = money;
         this.inventory = inventory;
+        this.maxWeight = maxWeight;
 
 
         // A new player always starts at level 1 with base stats and full health.
@@ -49,14 +53,12 @@ public abstract class Player {
         this.level = 1;
         this.healthPoints = 10;
         this.currentHealthPoints = 10;
+        this.currentWeight = 0; // starts empty
 
         this.abilities = getAbilitiesForLevel(1);
     }
 
-
-    public String getAvatarClass () {
-        return avatarClass;
-    }
+    /* MONEY */
 
     public void removeMoney(int amount) throws IllegalArgumentException {
         if (money - amount < 0) {
@@ -70,6 +72,9 @@ public abstract class Player {
         money = money + (value != null ? value : 0);
     }
 
+    /* END MONEY */
+
+    /* LEVELS */
 
     // XP thresholds for each level based on the original game progression formula.
     // retrieveLevel() uses these values to determine the correct level at any time.
@@ -90,6 +95,10 @@ public abstract class Player {
 
         return 5;
     }
+
+    /* END LEVELS */
+
+    /* XP */
 
     // XP addition triggers a level check.
     // If the player levels up:
@@ -118,69 +127,9 @@ public abstract class Player {
         this.abilities.putAll(getAbilitiesForLevel(newLevel));
     }
 
+    /* END XP */
 
-    protected void addRandomItem() {
-        Random random = new Random();
-        inventory.add(objectList[random.nextInt(objectList.length)]);
-    }
-
-    /* GETTERS */
-
-    public int getXp() {
-        return this.xp;
-    }
-
-    public String getPlayerName(){
-        return this.playerName;
-    }
-
-    public String getAvatarName(){
-        return this.avatarName;
-    }
-
-    public int getMoney(){
-        return this.money;
-    }
-
-    public int getHealthPoints(){
-        return this.healthPoints;
-    }
-
-    public int getCurrentHealthPoints(){
-        return this.currentHealthPoints;
-    }
-
-    public HashMap<String, Integer> getAbilities(){
-        return this.abilities;
-    }
-
-    public ArrayList<String> getInventory(){
-        return this.inventory;
-    }
-
-    /* END GETTERS */
-
-    /* SETTERS */
-
-    public void setMoney(int value){
-        this.money = value;
-    }
-
-    public void setCurrentHealthPoints(int value){
-        this.currentHealthPoints = value;
-    }
-
-    public void setHealthPoints(int value){
-        this.healthPoints = value;
-    }
-
-    public void setInventory(ArrayList<String> inventory) {
-        this.inventory = inventory;
-    }
-
-
-    /* END SETTERS */
-
+    /* END OF TURN */
 
     // End-of-turn healing logic:
     // 1. If the player is KO (0 HP), print message and stop.
@@ -225,6 +174,130 @@ public abstract class Player {
     protected void onKO() {
         System.out.println("Le joueur est KO !");
     }
+
+    /* END END OF TURN */
+
+    /* ITEMS */
+
+    protected void addRandomItem() {
+        Random random = new Random();
+        Item item = objectList[random.nextInt(objectList.length)];
+        addItem(item);
+    }
+
+
+    public boolean addItem(Item item) {
+        if (currentWeight + item.getItemWeight() > maxWeight) {
+            return false;
+        }
+        inventory.add(item);
+        currentWeight += item.getItemWeight();
+        return true;
+    }
+
+    public boolean removeItem(Item item) { // If you just want to remove it without getting money
+        if (inventory.remove(item)) {
+            currentWeight -= item.getItemWeight();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean sellItem(Item item) { // If you want to sell it for money
+        if (removeItem(item)) {
+            this.money += item.getItemValue();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean buyItem(Item item) {
+
+        if (this.money < item.getItemValue()) {
+            System.out.println("Purchase impossible : insufficient funds.");
+            return false;
+        }
+
+        if (currentWeight + item.getItemWeight() > maxWeight) {
+            System.out.println("Purchase impossible : maximum weight exceeded.");
+            return false;
+        }
+
+        this.money -= item.getItemValue();
+        inventory.add(item);
+        currentWeight += item.getItemWeight();
+
+        System.out.println("Purchase successful : " + item.getItemName());
+        return true;
+    }
+
+    /* END ITEMS */
+
+    /* GETTERS */
+
+    public int getXp() {
+        return this.xp;
+    }
+
+    public String getPlayerName(){
+        return this.playerName;
+    }
+
+    public String getAvatarName(){
+        return this.avatarName;
+    }
+
+    public String getAvatarClass () {
+        return avatarClass;
+    }
+
+    public int getMoney(){
+        return this.money;
+    }
+
+    public int getHealthPoints(){
+        return this.healthPoints;
+    }
+
+    public int getCurrentHealthPoints(){
+        return this.currentHealthPoints;
+    }
+
+    public HashMap<String, Integer> getAbilities(){
+        return this.abilities;
+    }
+
+    public ArrayList<Item> getInventory(){
+        return this.inventory;
+    }
+
+    public int getMaxWeight() { return this.maxWeight; }
+
+    public int getCurrentWeight() { return this.currentWeight; }
+
+    /* END GETTERS */
+
+    /* SETTERS */
+
+    public void setMoney(int value){
+        this.money = value;
+    }
+
+    public void setCurrentHealthPoints(int value){
+        this.currentHealthPoints = value;
+    }
+
+    public void setHealthPoints(int value){
+        this.healthPoints = value;
+    }
+
+    public void setInventory(ArrayList<Item> inventory) {
+        this.inventory = inventory;
+    }
+
+    public void setCurrentWeight(int value) { this.currentWeight = value; }
+
+    /* END SETTERS */
 
 
 }

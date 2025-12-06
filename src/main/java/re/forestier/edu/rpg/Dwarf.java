@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Dwarf extends Player {
-    public Dwarf(String playerName, String avatarName, int money, ArrayList<String> inventory) {
-        super(playerName, avatarName, "DWARF", money, inventory);
+    public Dwarf(String playerName, String avatarName, int money, ArrayList<Item> inventory) {
+        super(playerName, avatarName, "DWARF", money, inventory, 80); //Dwarf is clearly the strongest class, so he can hold a lot more of items.
     }
 
     @Override

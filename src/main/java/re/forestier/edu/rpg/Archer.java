@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 public class Archer extends Player {
 
-    public Archer(String playerName, String avatarName, int money, ArrayList<String> inventory) {
-        super(playerName, avatarName, "ARCHER", money, inventory);
+    public Archer(String playerName, String avatarName, int money, ArrayList<Item> inventory) {
+        super(playerName, avatarName, "ARCHER", money, inventory, 50); //Archer is light and agile and he wear a quiver, arrows and bow but not heavy weapon
     }
 
     @Override

@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 public class Goblin extends Player{
 
-    public Goblin(String playerName, String avatarName, int money, ArrayList<String> inventory) {
-        super(playerName, avatarName, "GOBLIN", money, inventory);
+    public Goblin(String playerName, String avatarName, int money, ArrayList<Item> inventory) {
+        super(playerName, avatarName, "GOBLIN", money, inventory, 30); //Goblin is small, weak muscles so he can't hold  alot of items in his inventory.
     }
 
     @Override

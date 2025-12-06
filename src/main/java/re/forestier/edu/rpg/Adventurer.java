@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Adventurer extends Player {
-    public Adventurer(String playerName, String avatarName, int money, ArrayList<String> inventory) {
-        super(playerName, avatarName, "ADVENTURER", money, inventory);
+    public Adventurer(String playerName, String avatarName, int money, ArrayList<Item> inventory) {
+        super(playerName, avatarName, "ADVENTURER", money, inventory, 60); //Adventurer is a "default class", not too strong and not too weak
     }
 
     @Override
