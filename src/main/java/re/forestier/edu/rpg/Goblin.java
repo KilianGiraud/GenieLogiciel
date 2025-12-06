@@ -43,10 +43,7 @@ public class Goblin extends Player{
 
     @Override
     protected void healLogic() {
-        int alc = this.getAbilities().getOrDefault("ALC", 0);
-        int healAmount = alc / 2;
-
-        setCurrentHealthPoints(getCurrentHealthPoints() + healAmount);
+        // No heal
     }
 
 
