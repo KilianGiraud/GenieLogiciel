@@ -39,7 +39,7 @@ public class Goblin extends Player{
     }
 
     // Overrided method specific to each player
-    // Heal Logic not indicated in subject so here is an idea I had.
+    // Heal Logic not indicated in subject so there is no heal.
 
     @Override
     protected void healLogic() {
