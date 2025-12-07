@@ -2,9 +2,7 @@ package re.forestier.edu;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import re.forestier.edu.rpg.Adventurer;
-import re.forestier.edu.rpg.Affichage;
-import re.forestier.edu.rpg.Player;
+import re.forestier.edu.rpg.*;
 
 import java.util.ArrayList;
 
@@ -22,5 +20,14 @@ public class GlobalTest {
         player.setInventory(new ArrayList<>());
 
         verify(Affichage.afficherJoueur(player));
+    }
+
+    @Test
+    void testAffichageMarkdown() {
+        Dwarf p = new Dwarf("Kilian", "Denver le dinosaure", 200, new ArrayList<>());
+
+        p.addItem(new Item("Lookout Ring", "Prevents surprise attacks", 1, 50));
+
+        verify(Affichage.afficherJoueurMarkdown(p));
     }
 }
