@@ -1,42 +1,56 @@
-# Génie Logiciel : Refactoring
+# Génie Logiciel : Ajout de fonctionnalités
 
-Le refactoring a entièrement restructuré la logique du jeu pour la rendre **plus claire, maintenable et extensible**.
+## Adventurer au level 2
 
-## Architecture du joueur
+**Ce problème a été reglé lors du refactoring, le passage au level 2 se fait naturellement désormais**
 
-* `Player` devient une **classe abstraite**.
-* `Adventurer`, `Archer` et `Dwarf` deviennent des **sous-classes**.
-* Chaque classe gère désormais **ses propres capacités** et **sa logique de soin**.
-* Toute la logique commune (XP, niveaux, inventaire, KO…) est centralisée dans `Player`.
+## Classe "Goblin"
 
-## Système XP / Niveaux
+Après un bon **refactoring**, ajouter la classe "Goblin" n'était pas compliqué, il suffisait de copier le patterne des autres classes et adapter les **capacités / logique de soin**
 
-* Création d’une **map de seuils d’XP** pour éviter les calculs répétés.
-* `addXp()` est simplifié et gère :
+## Gestion des objets
 
-    * la montée en niveau
-    * l’ajout d’un objet aléatoire
-    * la mise à jour des capacités du joueur
+Les objets étant de base de simple **châines de caractères**, il est utile de les transformer en **classe** afin d'en améliorer la gestion.
 
-## Fin de tour (End-of-Turn)
+Une logique de poids est également ajoutée faisant en sorte qu'un joueur ne puisse pas avoir trop d'objet dans son inventaire *(la capacité maximale dépend de la classe)*
 
-* La logique compliquée de `majFinDeTour()` est remplacée par :
+Un item a désormais plusieurs informations le concernant :
+* Son nom
+* Sa description
+* Son poids
+* Son coût
 
-    * `isKO()`
-    * `healLogic()` (surchargée dans chaque sous-classe)
-    * `capHealth()`
+Une classe **Item** a donc été créée avec des méthodes associées :
+* Les **getters**
+* Un formatage en **chaîne de caractère** pour l'affichage
 
-L’ensemble est beaucoup plus lisible et cohérent.
+Mais également des méthodes dans **Player** :
+* **addItem** : Pour ajouter un item dans son inventaire.
+* **buyItem** : Pour acheter un item en utilisant la monnaie du jeu.
+* **sellItem** : Pour vendre un item en echange d'argent.
+* **removeItem** : Pour simplement supprimer l'item de son inventaire sans gagner d'argent (similaire aux drops classiques dans les jeux).
 
-## Inventaire & Objets
+## Affichage en Markdown
 
-* Attribution des objets aléatoires déplacée dans `Player`.
-* Suppression de la classe inutile `UpdatePlayer`.
+Afin de réaliser cet affichage en **Markdown**, j'ai d'abord codé le test avec le fichier **approved.txt** pour respecter le principe de **TDD**
+
+Il y a 2 tests (et donc 2 fichiers approved.txt) qui ont été néccessaires :
+
+* **Affichage avec inventaire** : Un affichage classique avec un joueur possédant un ou plusieurs objets dans son inventaire
+* **Affichage sans inventaire** : Un affichage similaire mais cette fois ci en ne mettant aucun objet dans l'inventaire du joueur.
 
 ## Tests
 
-* Tous les tests ont été adaptés à l’architecture finale.
-* Le projet atteint un niveau élevé de couverture (≈90%).
-* Les branches non couvertes concernent uniquement les tableaux de stats des sous-classes (pas critiques).
+Des tests ont été rajoutés notamment en de l'implémentation du systeme d'**Item** et de la classe **"Goblin"** :
+
+* Goblin :
+  * Tests classiques de passage de niveau
+  * Test de la logique de soin
+* Item :
+  * Tests des différentes fonctions associées :
+    * **addItem**
+    * **removeItem**
+    * **buyItem**
+    * **sellItem**
 
 ---
