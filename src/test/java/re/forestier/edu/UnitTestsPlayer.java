@@ -101,14 +101,14 @@ public class UnitTestsPlayer {
     @DisplayName("Access to level 2")
     void testGoToLvl2() {
         Adventurer p = new Adventurer("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
-        final String[] objectList = {
-        "Lookout Ring : Prevents surprise attacks",
-        "Scroll of Stupidity : INT-2 when applied to an enemy",
-        "Draupnir : Increases XP gained by 100%",
-        "Magic Charm : Magic +10 for 5 rounds",
-        "Rune Staff of Curse : May burn your ennemies... Or yourself. Who knows?",
-        "Combat Edge : Well, that's an edge",
-        "Holy Elixir : Recover your HP"
+        final Item[] objectList = {
+                new Item("Lookout Ring", "Prevents surprise attacks", 1, 50),
+                new Item("Scroll of Stupidity", "INT -2 when applied to an enemy", 1, 10),
+                new Item("Draupnir", "Increases XP gained by 100%", 2, 80),
+                new Item("Magic Charm", "Magic +10 for 5 rounds", 1, 40),
+                new Item("Rune Staff of Curse", "May burn enemies or yourself", 5, 200),
+                new Item("Combat Edge", "Sharp weapon", 3, 100),
+                new Item("Holy Elixir", "Recover HP", 1, 30)
         };
 
         int oldSize = p.getInventory().size();
@@ -122,8 +122,12 @@ public class UnitTestsPlayer {
             assertThat(p.getInventory().size(), is(oldSize + 1));
             
             // Vérifie que le dernier objet ajouté est bien dans la liste des objets possibles
-            String lastAdded = p.getInventory().get(p.getInventory().size() - 1);
-            assertThat(Arrays.asList(objectList), hasItem(lastAdded));
+            Item lastAdded = p.getInventory().get(p.getInventory().size() - 1);
+            assertTrue(
+                    Arrays.stream(objectList)
+                            .anyMatch(item -> item.getItemName().equals(lastAdded.getItemName()))
+            );
+
 
             // Vérifie qu'au moins une ability a changé (ajoutée ou upgradée)
             boolean abilityChanged = p.getAbilities().entrySet().stream().anyMatch(entry ->

@@ -66,7 +66,7 @@ public class Affichage {
                         .append(" — ").append(item.getItemDescription())
                         .append(" *(")
                         .append(item.getItemWeight()).append(" kg, ")
-                        .append(item.getItemValue()).append(" g)*\n");
+                        .append(item.getItemValue()).append(" g)*");
             }
         }
 

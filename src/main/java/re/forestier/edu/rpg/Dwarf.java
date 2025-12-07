@@ -40,11 +40,16 @@ public class Dwarf extends Player {
 
     @Override
     protected void healLogic() {
-        if (getInventory().contains("Holy Elixir")) {
+        boolean hasElixir = getInventory().stream()
+                .anyMatch(item -> item.getItemName().equals("Holy Elixir"));
+
+        if (hasElixir) {
             setCurrentHealthPoints(getCurrentHealthPoints() + 1);
         }
+
         setCurrentHealthPoints(getCurrentHealthPoints() + 1);
     }
+
 
 }
 

@@ -30,8 +30,10 @@ public class Item {
         return value;
     }
 
-    public String toStringItem() {
-        return name + " (" + weight + "kg, " + value + "g)";
+    @Override
+    public String toString() {
+        return name + " — " + description + " (" + weight + "kg, " + value + "g)";
     }
+
 }
 

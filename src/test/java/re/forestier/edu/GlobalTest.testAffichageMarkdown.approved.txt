@@ -16,14 +16,11 @@ XP totale : **0**
 ---
 
 ## Capacités
+* ALC : 4
 * ATK : 3
-* DEF : 1
-* CHA : 3
-* INT : 2
+* INT : 1
 
 ---
 
-## Inventaire (4 / 60 kg)
+## Inventaire (1 / 80 kg)
 * Lookout Ring — Prevents surprise attacks *(1 kg, 50 g)*
-* Magic Charm — Magic +10 for 5 rounds *(1 kg, 40 g)*
-

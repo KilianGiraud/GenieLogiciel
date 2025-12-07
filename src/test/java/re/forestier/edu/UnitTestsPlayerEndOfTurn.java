@@ -1,11 +1,7 @@
 package re.forestier.edu;
 
 import org.junit.jupiter.api.*;
-import re.forestier.edu.rpg.Adventurer;
-import re.forestier.edu.rpg.Archer;
-import re.forestier.edu.rpg.Dwarf;
-import re.forestier.edu.rpg.Affichage;
-import re.forestier.edu.rpg.Player;
+import re.forestier.edu.rpg.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -70,8 +66,8 @@ public class UnitTestsPlayerEndOfTurn {
         p1.setCurrentHealthPoints(100);
         p1.setHealthPoints(1000);
 
-        p.getInventory().add("Holy Elixir");
-        p1.getInventory().add("Magic Bow");
+        p.addItem(new Item("Holy Elixir", "Recover HP", 1, 30));
+        p1.addItem(new Item("Magic Bow", "Magic boost", 2, 80));
 
         p.endOfTurn();
         p1.endOfTurn();
