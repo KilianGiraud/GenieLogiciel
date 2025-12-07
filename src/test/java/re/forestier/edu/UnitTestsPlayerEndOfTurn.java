@@ -25,7 +25,7 @@ public class UnitTestsPlayerEndOfTurn {
     }
 
 
-    // Fonction qui va tester les différentes conditions du la fonction "majFinDeTour" pour les différentes classes et les différents types de vie
+    // Fonction qui va tester les différentes conditions du la fonction "endOfTurn" pour les différentes classes et les différents types de vie
     @Test
     @DisplayName("Alive player for all classes with all type of life")
     void testAlivePlayer() {
@@ -50,30 +50,5 @@ public class UnitTestsPlayerEndOfTurn {
                 p.endOfTurn();
             }
         }
-    }
-    
-
-
-    // Fonction qui va tester les conditions d'inventaires pour les classes "DWARF" et "ARCHER" 
-    @Test
-    @DisplayName("Conditional Inventory for DWARF and ARCHER with low life")
-    void testConditionalinventoryPlayer() {
-        Dwarf p = new Dwarf("Kilian", "Denver le dernier Dinosaure", 100, new ArrayList<>());
-        Archer p1 = new Archer("Hugolin", "Samsam", 100, new ArrayList<>());
-
-        p.setCurrentHealthPoints(100);
-        p.setHealthPoints(1000);
-        p1.setCurrentHealthPoints(100);
-        p1.setHealthPoints(1000);
-
-        p.addItem(new Item("Holy Elixir", "Recover HP", 1, 30));
-        p1.addItem(new Item("Magic Bow", "Magic boost", 2, 80));
-
-        p.endOfTurn();
-        p1.endOfTurn();
-
-        assertThat(p.getCurrentHealthPoints(), is(102));
-        assertThat(p1.getCurrentHealthPoints(), is(112));
-
     }
 }

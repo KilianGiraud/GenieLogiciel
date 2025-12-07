@@ -58,7 +58,7 @@ public class Affichage {
                 .append(" kg)\n");
 
         if (player.getInventory().isEmpty()) {
-            sb.append("*(vide)*\n");
+            sb.append("*(vide)*");
         } else {
             for (Item item : player.getInventory()) {
                 sb.append("* ")

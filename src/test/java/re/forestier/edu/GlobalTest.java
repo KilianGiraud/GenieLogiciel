@@ -30,4 +30,11 @@ public class GlobalTest {
 
         verify(Affichage.afficherJoueurMarkdown(p));
     }
+
+    @Test
+    void testAffichageMarkdownEmpty() {
+        Dwarf p = new Dwarf("Kilian", "Denver le dinosaure", 200, new ArrayList<>());
+
+        verify(Affichage.afficherJoueurMarkdown(p));
+    }
 }
