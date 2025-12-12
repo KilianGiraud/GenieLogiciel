@@ -254,11 +254,7 @@ public abstract class Player {
     public int getMoney(){
         return this.money;
     }
-
-    public int getHealthPoints(){
-        return this.healthPoints;
-    }
-
+    
     public int getCurrentHealthPoints(){
         return this.currentHealthPoints;
     }
